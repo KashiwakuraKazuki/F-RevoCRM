@@ -45,7 +45,7 @@ class Vtiger_Language_Handler {
 		if ($translatedString === null) {
 			$translatedString = $key;
 		}
-		$translatedString = Settings_LanguageConverter_Module_Model::convertTranslate($translatedString, $module);
+		$translatedString = Settings_LanguageConverter_Module_Model::convertTranslate($translatedString, $module, $currentLanguage);
 		return $translatedString;
 	}
 
