@@ -1340,13 +1340,15 @@ Vtiger.Class("Calendar_Calendar_Js", {
 				if (typeof Vtiger_Jodit_Js !== 'undefined' && Vtiger_Jodit_Js.syncAllInstances) {
 					Vtiger_Jodit_Js.syncAllInstances();
 				}
-				var formData = jQuery(form).serializeFormData();
 				jQuery("button[name='saveButton']").attr("disabled", "disabled");
 				var e = jQuery.Event(Vtiger_Edit_Js.recordPresaveEvent);
 				app.event.trigger(e);
 				if (e.isDefaultPrevented()) {
 					return false;
 				}
+				// 保存前イベントで追加される項目（顧客担当者の contactidlist、参加者の inviteesid 等）を
+				// 送信データに含めるため、イベント発火後にフォームをシリアライズする
+				var formData = jQuery(form).serializeFormData();
 				Calendar_Edit_Js.showOverlapEventConfirmationBeforeSave(formData)
 				.then(function () {
 					app.helper.showProgress();
